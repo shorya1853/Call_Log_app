@@ -1,0 +1,23 @@
+class CallLogModel {
+  String phoneNumber;
+  int callCount;
+  List<CallDetailsModel> callDetails;
+
+  CallLogModel({
+    required this.phoneNumber,
+    required this.callCount,
+    required this.callDetails,
+  });
+}
+
+class CallDetailsModel {
+  String callType;
+  DateTime callDate;
+  int callDuration;
+
+  CallDetailsModel({
+    required this.callType,
+    required this.callDate,
+    required this.callDuration,
+  });
+}
