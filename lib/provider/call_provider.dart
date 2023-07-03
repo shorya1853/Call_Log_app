@@ -17,6 +17,7 @@ class CallcountNotifier extends StateNotifier<List<CallLogModel>>{
       CallLogModel callLog = callLogMap[phoneNumber]!;
       callLog.callCount += 1;
       callLog.callDetails.add(CallDetailsModel(
+        description: '',
         callType: entry.callType.toString(),
         callDate:  DateTime.fromMillisecondsSinceEpoch(entry.timestamp!),
         callDuration: entry.duration!,
@@ -27,6 +28,7 @@ class CallcountNotifier extends StateNotifier<List<CallLogModel>>{
         callCount: 1,
         callDetails: [
           CallDetailsModel(
+            description: '',
             callType: entry.callType.toString(),
             callDate: DateTime.fromMillisecondsSinceEpoch(entry.timestamp!),
             callDuration: entry.duration!,

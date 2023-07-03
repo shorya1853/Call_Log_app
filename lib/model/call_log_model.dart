@@ -14,10 +14,13 @@ class CallDetailsModel {
   String callType;
   DateTime callDate;
   int callDuration;
+  String description;
+  
 
   CallDetailsModel({
     required this.callType,
     required this.callDate,
     required this.callDuration,
+    required this.description,
   });
 }
