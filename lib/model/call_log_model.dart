@@ -1,9 +1,11 @@
 class CallLogModel {
+  String name;
   String phoneNumber;
   int callCount;
   List<CallDetailsModel> callDetails;
 
   CallLogModel({
+    required this.name,
     required this.phoneNumber,
     required this.callCount,
     required this.callDetails,

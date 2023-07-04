@@ -15,6 +15,7 @@ class CallcountNotifier extends StateNotifier<List<CallLogModel>>{
 
     if (callLogMap.containsKey(phoneNumber)) {
       CallLogModel callLog = callLogMap[phoneNumber]!;
+      callLog.name = entry.name ?? 'USER';
       callLog.callCount += 1;
       callLog.callDetails.add(CallDetailsModel(
         description: '',
@@ -24,6 +25,7 @@ class CallcountNotifier extends StateNotifier<List<CallLogModel>>{
       ));
     } else {
       callLogMap[phoneNumber] = CallLogModel(
+        name: entry.name ?? 'USER',
         phoneNumber: phoneNumber,
         callCount: 1,
         callDetails: [

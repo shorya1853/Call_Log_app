@@ -22,7 +22,11 @@ class _CallDetailScreenState extends State<CallDetailScreen> {
         itemCount: widget.calldetails.length,
         itemBuilder: (context, index) {
           return ListTile(
-            title: Text(widget.calldetails[index].callType)
+            title: Text(widget.calldetails[index].callType),
+            subtitle: Text(widget.calldetails[index].callDate.toString()),
+            trailing: IconButton(icon: const  Icon(Icons.more_vert), onPressed:() {
+              
+            },)
           );
       },)
     );

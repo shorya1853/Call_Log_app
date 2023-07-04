@@ -12,7 +12,7 @@ class CallLogScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Call Log'),
+        title: const Text('Call Log'),
       ),
       body: Consumer(
         builder: (context, ref, _) {
@@ -29,9 +29,10 @@ class CallLogScreen extends StatelessWidget {
                  
                   // Display the call log data here
                   return ListTile(
-                      title: Text(callLog.phoneNumber),
+                      title: Text(callLog.name),
                       subtitle: Row(
                         children: [
+                          Text(callLog.phoneNumber),
                           Container(
                             width: 15,
                             height: 15.0,
