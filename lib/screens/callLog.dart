@@ -2,11 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:queryapp/provider/call_provider.dart';
 import 'package:queryapp/screens/call_detail_screen.dart';
-
+import 'package:http/http.dart' as http;
 import '../model/call_log_model.dart';
 
 class CallLogScreen extends StatelessWidget {
   const CallLogScreen({super.key});
+
+ 
+  
 
   @override
   Widget build(BuildContext context) {
@@ -32,10 +35,11 @@ class CallLogScreen extends StatelessWidget {
                       title: Text(callLog.name),
                       subtitle: Row(
                         children: [
-                          Text(callLog.phoneNumber),
+                          Padding(padding: const EdgeInsets.only(right: 8), 
+                          child: Text(callLog.phoneNumber),),
                           Container(
-                            width: 15,
-                            height: 15.0,
+                            width: 18,
+                            height: 18.0,
                             decoration: const BoxDecoration(
                                 shape: BoxShape.circle,
                                 color: Color.fromRGBO(239, 234, 234, 1)),

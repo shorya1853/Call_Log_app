@@ -1,10 +1,21 @@
 import 'package:call_log/call_log.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-
+import 'package:intl/intl.dart';
 import '../model/call_log_model.dart';
+
 
 class CallcountNotifier extends StateNotifier<List<CallLogModel>>{
   CallcountNotifier(): super([]);
+
+  Future<String> get_descrip(String description) async {
+    String description = '';
+    return description;
+  }
+  String dateFormate (int timestamp){
+    final parse = DateTime.fromMillisecondsSinceEpoch(timestamp);
+    final formated = DateFormat('dd-MMM-yyy').format(parse);
+    return formated;
+  }
 
 
   List<CallLogModel> _processCallLogEntries(Iterable<CallLogEntry> entries) {
@@ -18,9 +29,9 @@ class CallcountNotifier extends StateNotifier<List<CallLogModel>>{
       callLog.name = entry.name ?? 'USER';
       callLog.callCount += 1;
       callLog.callDetails.add(CallDetailsModel(
-        description: '',
+        description: 'Empty description, ${entry.callType}',
         callType: entry.callType.toString(),
-        callDate:  DateTime.fromMillisecondsSinceEpoch(entry.timestamp!),
+        callDate:  dateFormate(entry.timestamp!),
         callDuration: entry.duration!,
       ));
     } else {
@@ -30,9 +41,9 @@ class CallcountNotifier extends StateNotifier<List<CallLogModel>>{
         callCount: 1,
         callDetails: [
           CallDetailsModel(
-            description: '',
+            description: 'Empty description, ${entry.callType}',
             callType: entry.callType.toString(),
-            callDate: DateTime.fromMillisecondsSinceEpoch(entry.timestamp!),
+            callDate: dateFormate(entry.timestamp!),
             callDuration: entry.duration!,
           ),
         ],

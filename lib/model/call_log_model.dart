@@ -14,7 +14,7 @@ class CallLogModel {
 
 class CallDetailsModel {
   String callType;
-  DateTime callDate;
+  String callDate;
   int callDuration;
   String description;
   

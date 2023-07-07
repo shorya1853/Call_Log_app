@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:queryapp/call_post.dart';
 
 class DescriptionScreen extends StatelessWidget {
-  DescriptionScreen({super.key});
+  DescriptionScreen({super.key, required this.call_date, required this.calltype});
+  final String call_date;
+  final String calltype;
   final TextEditingController descController = TextEditingController();
 
   @override
@@ -26,7 +29,10 @@ class DescriptionScreen extends StatelessWidget {
             cursorHeight: 27,
           ),
         ),
-        ElevatedButton(onPressed: (){}, child: const Text('Save'))
+        ElevatedButton(onPressed: (){
+          insertData(descController.text, call_date, calltype);
+          Navigator.of(context).pop();
+        }, child: const Text('Save'))
         ]),
         );
   }
