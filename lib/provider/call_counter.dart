@@ -1,16 +1,15 @@
 import 'package:call_log/call_log.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
+import '../call_post.dart';
 import '../model/call_log_model.dart';
 
 
 class CallcountNotifier extends StateNotifier<List<CallLogModel>>{
   CallcountNotifier(): super([]);
 
-  Future<String> get_descrip(String description) async {
-    String description = '';
-    return description;
-  }
+
   String dateFormate (int timestamp){
     final parse = DateTime.fromMillisecondsSinceEpoch(timestamp);
     final formated = DateFormat('dd-MMM-yyy').format(parse);
@@ -18,7 +17,7 @@ class CallcountNotifier extends StateNotifier<List<CallLogModel>>{
   }
 
 
-  List<CallLogModel> _processCallLogEntries(Iterable<CallLogEntry> entries) {
+  List<CallLogModel> processCallLogEntries(Iterable<CallLogEntry> entries) {
   Map<String, CallLogModel> callLogMap = {};
 
     for(var entry in entries){
@@ -29,7 +28,7 @@ class CallcountNotifier extends StateNotifier<List<CallLogModel>>{
       callLog.name = entry.name ?? 'USER';
       callLog.callCount += 1;
       callLog.callDetails.add(CallDetailsModel(
-        description: 'Empty description, ${entry.callType}',
+        description: 'Empty description',
         callType: entry.callType.toString(),
         callDate:  dateFormate(entry.timestamp!),
         callDuration: entry.duration!,
@@ -41,7 +40,7 @@ class CallcountNotifier extends StateNotifier<List<CallLogModel>>{
         callCount: 1,
         callDetails: [
           CallDetailsModel(
-            description: 'Empty description, ${entry.callType}',
+            description: 'Empty description',
             callType: entry.callType.toString(),
             callDate: dateFormate(entry.timestamp!),
             callDuration: entry.duration!,
@@ -60,8 +59,12 @@ final callLogProvider = StateNotifierProvider<CallcountNotifier, List<CallLogMod
 });
 
 final call_provider = FutureProvider((ref) async{
+  
   final entries = await CallLog.get();
-  final calldetail = ref.watch(callLogProvider.notifier)._processCallLogEntries(entries);
+  final calldetailNotifier = ref.watch(callLogProvider.notifier);
+  final  calldetail= calldetailNotifier.processCallLogEntries(entries);
+
   return calldetail;
     
 },);
+

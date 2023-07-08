@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:queryapp/provider/call_provider.dart';
 import 'package:queryapp/screens/call_detail_screen.dart';
-import 'package:http/http.dart' as http;
 import '../model/call_log_model.dart';
+import '../provider/call_counter.dart';
+
 
 class CallLogScreen extends StatelessWidget {
   const CallLogScreen({super.key});

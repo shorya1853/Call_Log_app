@@ -1,7 +1,7 @@
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
-Future<void> insertData(String description, String callDate, String calltype) async {
+Future<String?> insertData(String description, String callDate, String calltype) async {
   const url = 'http://10.0.2.2:5000/insert';
 
   Map<String, dynamic> data = {
@@ -17,8 +17,14 @@ Future<void> insertData(String description, String callDate, String calltype) as
   );
 
   if (response.statusCode == 200) {
+
     print('Data inserted successfully');
+    final responseData = jsonDecode(response.body);
+    final insertID = responseData['inserted_id'];
+    return insertID;
+ 
   } else {
     print('Failed to insert data');
   }
 }
+
