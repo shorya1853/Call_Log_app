@@ -2,6 +2,7 @@ import base64
 from flask import Flask, jsonify, render_template, json,request, redirect, url_for
 from database import Database
 from bson import ObjectId
+from bson.json_util import dumps
 import io
 
 
@@ -10,26 +11,31 @@ db = Database()
 collection = db.get_collection('callLog_collection')
 image_collection = db.image_collection('contact_profile_image')
 
-@app.route('/')
-def home():
-    return render_template('index.html')
+# @app.route('/', methods=["GET","POST"])
+# def home():
+#     if(request.method == 'POST'):
+#         desc = request.form['description']
+#         call_date = request.form['call_date']
+#         return redirect(url_for("insert", description = desc, call_dates = call_date))
+#     return render_template('index.html')
 
-
+    
 @app.route('/insert', methods=['POST'])
-def insert_image():
+def insert():
     try:
-         
-        response = collection.insert_one()
-        return redirect(url_for())
-        
+        data = request.get_json()
+        response = collection.insert_many(data)
+        return jsonify({'message': 'success'})
     except Exception as ex:
         print(ex)
 
-@app.route("/user")
-def user_profile():
-    collection.find()
-    return jsonify({'message': 'Success'})
-# Other API endpoints and routes can be defined here
+
+@app.route('/description', methods=['GET'])
+def get_desc():
+    response = collection.find({}, {'_id': False})
+    json_data = dumps(response)
+    return json_data, 200, {'Content-Type': 'application/json'}
+
 
 @app.route("/imagefile", methods=['POST'])
 def profile_image():
