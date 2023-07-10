@@ -8,6 +8,7 @@ class DescriptionScreen extends StatelessWidget {
   final String calltype;
   final TextEditingController descController = TextEditingController();
 
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -31,9 +32,6 @@ class DescriptionScreen extends StatelessWidget {
           ),
         ),
         ElevatedButton(onPressed: ()async{
-          final id_response = await insertData(descController.text, call_date, calltype);
-          print(id_response);
-          
           Navigator.of(context).pop();
         }, child: const Text('Save'))
         ]),

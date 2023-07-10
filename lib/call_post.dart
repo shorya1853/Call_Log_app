@@ -1,14 +1,14 @@
 import 'package:http/http.dart' as http;
 import 'dart:convert';
+import 'model/call_log_model.dart';
 
-Future<String?> insertData(String description, String callDate, String calltype) async {
+
+
+Future<String?> insertData(List<CallLogModel> callLogData) async {
   const url = 'http://10.0.2.2:5000/insert';
 
-  Map<String, dynamic> data = {
-    'description': description,
-    'call_date': callDate,
-    'call_type': calltype,
-  };
+  final data = callLogData.map((e) => e.toJson(),).toList();
+
 
   final response = await http.post(
     Uri.parse(url),
@@ -28,3 +28,16 @@ Future<String?> insertData(String description, String callDate, String calltype)
   }
 }
 
+Future<List<CallLogModel>> getCallLogs() async {
+  const url = 'http://10.0.2.2:5000/description';  
+
+  final response = await http.get(Uri.parse(url));
+
+  if (response.statusCode == 200) {
+    final jsonData = json.decode(response.body) ;
+    final callData = jsonData.map((json) => CallLogModel.fromJson(json)).toList();
+    return callData;
+  } else {
+    throw Exception('Failed to fetch call logs');
+  }
+}

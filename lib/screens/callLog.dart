@@ -1,16 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:queryapp/screens/call_detail_screen.dart';
+import 'package:queryapp/screens/call_insert_screen.dart';
 import '../model/call_log_model.dart';
 import '../provider/call_counter.dart';
 
 
 class CallLogScreen extends StatelessWidget {
   const CallLogScreen({super.key});
-
- 
-  
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -62,9 +59,13 @@ class CallLogScreen extends StatelessWidget {
                       onTap: () {
                         Navigator.of(context).push(MaterialPageRoute(
                             builder: (context) => CallDetailScreen(
-                                calldetails: callLog.callDetails)));
+                                calldetails: callLog.callDetails),),);
                       },
-                      trailing: const Icon(Icons.call));
+                      trailing: IconButton(
+                        icon: const Icon(Icons.call),
+                        onPressed: (){
+                        Navigator.of(context).push(MaterialPageRoute(builder: (context)=>  CallInsert(callLogData: callLogList),),);
+                      },));
                 },
               );
             },
