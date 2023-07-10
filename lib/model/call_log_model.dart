@@ -12,10 +12,10 @@ class CallLogModel {
   });
 
   factory CallLogModel.fromJson(Map<String, dynamic> json) {
-    final callfromjson = json['callDetails'];
+    List<dynamic> callfromjson = json['callDetails'];
 
     List<CallDetailsModel> callDetails =
-        List<CallDetailsModel>.from(callfromjson);
+        callfromjson.map((item) => CallDetailsModel.fromJson(item)).toList();
 
     return CallLogModel(
       name: json['name'],

@@ -34,8 +34,8 @@ Future<List<CallLogModel>> getCallLogs() async {
   final response = await http.get(Uri.parse(url));
 
   if (response.statusCode == 200) {
-    final jsonData = json.decode(response.body) ;
-    final callData = jsonData.map((json) => CallLogModel.fromJson(json)).toList();
+    final jsonData = json.decode(response.body) as List<dynamic>;
+    final callData = jsonData.map((item) => CallLogModel.fromJson(item)).toList();
     return callData;
   } else {
     throw Exception('Failed to fetch call logs');

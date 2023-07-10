@@ -11,20 +11,16 @@ class FetchCall extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: const Text('Fetched Data')
+      ),
       body: ListView.builder(
         itemCount: callLogs.length,
         itemBuilder: (context, index){
           final List<CallDetailsModel> callDetail = callLogs[index].callDetails;
           return ListTile(
             title: Text(callLogs[index].phoneNumber),
-            subtitle: ListView.builder(
-              itemCount: callDetail.length,
-              itemBuilder: (context, index){
-                return ListTile(
-                title: Text(callDetail[index].callType),
-                subtitle: Text(callDetail[index].callDate)
-                );
-              }),
+            subtitle: Text(callLogs[index].name)
           );
       },),);
   }

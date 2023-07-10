@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:queryapp/screens/call_detail_screen.dart';
-import 'package:queryapp/screens/call_insert_screen.dart';
 import '../model/call_log_model.dart';
 import '../provider/call_counter.dart';
 
@@ -62,10 +61,8 @@ class CallLogScreen extends StatelessWidget {
                                 calldetails: callLog.callDetails),),);
                       },
                       trailing: IconButton(
-                        icon: const Icon(Icons.call),
-                        onPressed: (){
-                        Navigator.of(context).push(MaterialPageRoute(builder: (context)=>  CallInsert(callLogData: callLogList),),);
-                      },));
+                        icon: const Icon(Icons.call), 
+                        onPressed: (){},));
                 },
               );
             },

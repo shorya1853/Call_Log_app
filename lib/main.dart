@@ -21,8 +21,14 @@ class MyApp extends StatelessWidget{
         builder: ((context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
               return const Center(child: CircularProgressIndicator());
-            } else if (snapshot.hasError) {
-              return Center(child: Text('Error: ${snapshot.error}'));
+            }
+            else if (snapshot.hasError) {
+              if(snapshot.error.toString() == 'Connection failed'){
+                return const CallLogScreen();
+              }
+              else{
+                return Text('Error: ${snapshot.error}');
+              }
             } else {
               final callLogs = snapshot.data!;
               return FetchCall(callLogs: callLogs);
